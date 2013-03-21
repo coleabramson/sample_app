@@ -44,3 +44,12 @@ Spork.each_run do
   # This code will be run each time you run your specs.
 
 end
+
+def sign_in(user)
+  visit signin_path
+  fill_in "Email", with: user.email.upcase
+  fill_in "Password", with: user.password
+  click_button "Sign in"
+  # Sign in when not using Capybara
+  cookies[:remember_token] = user.remember_token
+end
